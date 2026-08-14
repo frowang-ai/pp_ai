@@ -13,6 +13,7 @@ from collections.abc import AsyncIterator
 
 import httpx
 import pytest
+
 from pi_ai.utils.http import (
     HttpRequest,
     ProviderHttpError,

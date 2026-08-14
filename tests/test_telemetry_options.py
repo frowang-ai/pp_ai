@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from pi_telemetry import NOOP_TELEMETRY_CONTEXT
+
 from pi_ai.api.simple_options import build_base_options
 from pi_ai.auth.types import ApiKeyAuth, AuthResult, ProviderAuth, ResolvedAuth
 from pi_ai.image_models import ImagesModel
@@ -28,7 +30,6 @@ from pi_ai.types import (
     Usage,
 )
 from pi_ai.utils.event_stream import AssistantMessageEventStream
-from pi_telemetry import NOOP_TELEMETRY_CONTEXT
 
 TELEMETRY_CONTEXT = NOOP_TELEMETRY_CONTEXT
 CONTEXT = Context(messages=[])

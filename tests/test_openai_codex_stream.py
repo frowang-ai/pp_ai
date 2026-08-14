@@ -49,6 +49,7 @@ message rather than silently falling back to a different API.
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.api import openai_codex_responses
 from pi_ai.providers.all import get_builtin_model, get_builtin_models
 from pi_ai.types import Context, SimpleStreamOptions, StreamOptions, UserMessage, now_ms

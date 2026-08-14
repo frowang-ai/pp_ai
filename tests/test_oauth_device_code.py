@@ -15,6 +15,7 @@ import asyncio
 from dataclasses import dataclass, field
 
 import pytest
+
 from pi_ai.auth.oauth.device_code import (
     DeviceCodeClock,
     DeviceCodeError,

@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 
 import httpx
+
 from pi_ai.api.google_generative_ai import GoogleOptions
 from pi_ai.api.google_generative_ai import stream as stream_google_generative_ai
 from pi_ai.api.google_vertex import GoogleVertexOptions

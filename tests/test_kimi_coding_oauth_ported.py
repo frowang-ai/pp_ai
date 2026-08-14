@@ -26,6 +26,7 @@ from urllib.parse import parse_qs
 
 import httpx
 import pytest
+
 from pi_ai.auth.oauth.device_code import DeviceCodeClock
 from pi_ai.auth.oauth.kimi_coding import build_kimi_coding_oauth
 from pi_ai.auth.types import AuthEvent, AuthInteraction, AuthPrompt, Credential, ResolvedAuth

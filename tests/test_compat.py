@@ -7,6 +7,7 @@ from __future__ import annotations
 import dataclasses
 
 import pytest
+
 from pi_ai import AssistantMessage, Context, Cost, Model, StartEvent, Usage, UserMessage
 from pi_ai.compat import (
     complete,

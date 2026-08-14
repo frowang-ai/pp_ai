@@ -6,6 +6,7 @@ import json
 
 import httpx
 import pytest
+
 from pi_ai import Context, Model, ModelCost, UserMessage
 from pi_ai.api.azure_openai_responses import (
     AzureOpenAIResponsesOptions,

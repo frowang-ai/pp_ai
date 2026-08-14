@@ -16,6 +16,7 @@ from typing import Any
 
 import httpx
 import pytest
+
 from pi_ai.api.openai_completions import (
     OpenAICompletionsOptions,
     ResolvedCompat,

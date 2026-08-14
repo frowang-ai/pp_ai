@@ -6,6 +6,7 @@ import json
 from typing import Any
 
 import httpx
+
 from pi_ai.api.openai_completions import OpenAICompletionsOptions, stream
 from pi_ai.providers.all import get_builtin_model
 from pi_ai.types import (

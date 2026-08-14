@@ -16,6 +16,7 @@ from typing import Any
 
 import httpx
 import pytest
+
 from pi_ai.api.azure_openai_responses import AzureOpenAIResponsesOptions
 from pi_ai.api.azure_openai_responses import stream as stream_azure_openai_responses
 from pi_ai.providers.all import get_builtin_model

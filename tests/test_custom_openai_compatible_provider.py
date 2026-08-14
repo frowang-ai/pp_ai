@@ -20,6 +20,7 @@ import json
 
 import httpx
 import pytest
+
 from pi_ai.api import openai_completions
 from pi_ai.auth.types import ApiKeyAuth, InMemoryCredentialStore, ProviderAuth
 from pi_ai.registry import Models, create_provider

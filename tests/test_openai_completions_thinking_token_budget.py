@@ -13,6 +13,7 @@ import json
 from typing import Any
 
 import httpx
+
 from pi_ai.api import openai_completions
 from pi_ai.types import (
     Context,

@@ -1,6 +1,7 @@
 import asyncio
 
 import pytest
+
 from pi_ai import (
     AssistantMessage,
     AssistantMessageEventStream,

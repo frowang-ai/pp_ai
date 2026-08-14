@@ -2,6 +2,7 @@ import json
 
 import httpx
 import pytest
+
 from pi_ai import ImageContent, TextContent
 from pi_ai.api.openrouter_images import (
     ImagesOptions,

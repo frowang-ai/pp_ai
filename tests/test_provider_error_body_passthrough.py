@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import httpx
 import pytest
+
 from pi_ai import images as images_module
 from pi_ai.api import openrouter_images
 from pi_ai.images import generate_images

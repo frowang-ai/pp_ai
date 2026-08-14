@@ -1,4 +1,5 @@
 import pytest
+
 from pi_ai.models import (
     ModelsError,
     calculate_cost,

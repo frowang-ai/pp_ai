@@ -9,6 +9,7 @@ native `ExceptionGroup` instead (see the module docstring).
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.session_resources import cleanup_session_resources, register_session_resource_cleanup
 
 

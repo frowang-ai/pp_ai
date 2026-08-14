@@ -8,6 +8,7 @@ everything reads the JSON shards committed under `pi_ai/providers/data/`.
 import json
 
 import pytest
+
 from pi_ai.model_catalog import (
     DATA_DIR,
     MODEL_DATA_MANIFEST_FILE,

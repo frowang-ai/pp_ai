@@ -6,8 +6,9 @@ directory or real host environment: every relevant variable is scrubbed via
 
 from __future__ import annotations
 
-import pi_ai.env_api_keys as env_api_keys
 import pytest
+
+import pi_ai.env_api_keys as env_api_keys
 from pi_ai.api import cloudflare
 
 ALL_ENV_VARS = (

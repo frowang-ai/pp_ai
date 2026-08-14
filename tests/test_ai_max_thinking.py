@@ -11,6 +11,7 @@ out. The catalog metadata it depends on is still pinned by the
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.models import clamp_thinking_level, get_supported_thinking_levels
 from pi_ai.providers.all import get_builtin_model
 from pi_ai.types import Model, ModelCost

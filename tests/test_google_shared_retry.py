@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-import pi_ai.utils.provider_retry as provider_retry_module
 import pytest
+
+import pi_ai.utils.provider_retry as provider_retry_module
 from pi_ai.api.google_shared import retry_google_request
 from pi_ai.types import StreamOptions
 from pi_ai.utils.abort import AbortSignal

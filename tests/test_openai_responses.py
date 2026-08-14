@@ -2,6 +2,7 @@ import json
 
 import httpx
 import pytest
+
 from pi_ai import (
     AssistantMessage,
     Context,

@@ -16,6 +16,7 @@ import time
 
 import httpx
 import pytest
+
 from pi_ai.auth.helpers import lazy_oauth
 from pi_ai.auth.oauth.device_code import (
     DeviceCodeClock,

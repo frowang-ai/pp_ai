@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 
 import httpx
+
 from pi_ai.api.openai_completions import OpenAICompletionsOptions, stream
 from pi_ai.types import Context, Model, ModelCost, UserMessage, now_ms
 

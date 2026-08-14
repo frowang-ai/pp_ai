@@ -25,6 +25,7 @@ from __future__ import annotations
 import dataclasses
 
 import pytest
+
 from pi_ai.api.google_vertex import (
     GoogleVertexOptions,
     _resolve_custom_base_url,

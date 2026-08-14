@@ -1,4 +1,5 @@
 import pytest
+
 from pi_ai.auth.helpers import env_api_key_auth, resolve_api_key_auth
 from pi_ai.auth.types import (
     ApiKeyAuth,

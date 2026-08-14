@@ -1,6 +1,7 @@
 import json
 
 import httpx
+
 from pi_ai import (
     AssistantMessage,
     Context,

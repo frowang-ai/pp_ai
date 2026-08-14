@@ -13,6 +13,7 @@ from typing import Any
 
 import httpx
 import pytest
+
 from pi_ai.api.openai_completions import OpenAICompletionsOptions, stream
 from pi_ai.providers.all import get_builtin_model
 from pi_ai.types import Context, Model, UserMessage, now_ms

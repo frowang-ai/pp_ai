@@ -20,6 +20,7 @@ import inspect
 import math
 
 import pytest
+
 from pi_ai.auth import oauth as oauth_barrel
 from pi_ai.auth.oauth import load as oauth_load
 from pi_ai.auth.types import Credential, OAuthAuth, ResolvedAuth

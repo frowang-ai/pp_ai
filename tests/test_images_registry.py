@@ -12,6 +12,7 @@ local stub function.
 import json
 
 import pytest
+
 from pi_ai.auth.helpers import env_api_key_auth
 from pi_ai.auth.types import Credential, InMemoryCredentialStore, ProviderAuth
 from pi_ai.image_models import (

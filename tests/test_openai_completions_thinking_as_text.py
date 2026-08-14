@@ -11,6 +11,7 @@ import json
 from typing import Any
 
 import httpx
+
 from pi_ai.api.openai_completions import (
     OpenAICompletionsOptions,
     convert_messages,

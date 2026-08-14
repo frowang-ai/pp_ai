@@ -17,6 +17,7 @@ re-expressed as a nullable one.
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.api.constrained_sampling import (
     UnsupportedStrictJsonSchemaError,
     get_json_schema_tool_parameters,

@@ -13,6 +13,7 @@ from collections.abc import AsyncIterator
 from typing import Any
 
 import pytest
+
 from pi_ai.api.constrained_sampling import (
     GrammarToolInputJsonBuffer,
     append_grammar_tool_input_json_delta,

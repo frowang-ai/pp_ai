@@ -15,6 +15,7 @@ from typing import Any
 
 import httpx
 import pytest
+
 from pi_ai.api.openai_responses import stream as stream_openai_responses
 from pi_ai.api.openai_responses_shared import process_responses_stream
 from pi_ai.types import (

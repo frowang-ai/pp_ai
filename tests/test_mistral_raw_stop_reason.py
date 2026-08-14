@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 
 import httpx
+
 from pi_ai.api.mistral_conversations import MistralOptions, stream
 from pi_ai.providers.all import get_builtin_model
 from pi_ai.types import Context, UserMessage

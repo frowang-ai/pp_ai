@@ -16,6 +16,7 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 import generate_image_models as gen  # noqa: E402
+
 from pi_ai.image_models import get_image_model, load_image_catalog  # noqa: E402
 
 

@@ -13,8 +13,9 @@ need a genuinely pending sleep for the signal to interrupt.
 import asyncio
 import math
 
-import pi_ai.utils.provider_retry as provider_retry_module
 import pytest
+
+import pi_ai.utils.provider_retry as provider_retry_module
 from pi_ai.utils.abort import AbortSignal
 from pi_ai.utils.provider_retry import (
     ProviderError,

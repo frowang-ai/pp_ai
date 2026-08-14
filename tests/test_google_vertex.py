@@ -2,6 +2,7 @@ import json
 
 import httpx
 import pytest
+
 from pi_ai import Context, Model, ModelCost, Tool, UserMessage
 from pi_ai.api.google_vertex import (
     GCP_VERTEX_CREDENTIALS_MARKER,

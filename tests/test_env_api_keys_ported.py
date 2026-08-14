@@ -7,6 +7,7 @@ port's own unit test for `pi_ai/env_api_keys.py`, not a port of this file.
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.env_api_keys import find_env_keys, get_env_api_key
 
 MANAGED_ENV_VARS = (

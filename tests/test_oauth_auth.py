@@ -10,8 +10,9 @@ from __future__ import annotations
 import time
 
 import httpx
-import pi_ai.auth.oauth.load as oauth_load
 import pytest
+
+import pi_ai.auth.oauth.load as oauth_load
 from pi_ai.auth.oauth.anthropic import build_anthropic_oauth
 from pi_ai.auth.oauth.github_copilot import build_github_copilot_oauth
 from pi_ai.auth.oauth.kimi_coding import build_kimi_coding_oauth

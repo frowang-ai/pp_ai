@@ -12,6 +12,7 @@ from typing import Any
 
 import httpx
 import pytest
+
 from pi_ai.compat import register_builtin_api_providers, stream_simple
 from pi_ai.env_api_keys import find_env_keys
 from pi_ai.providers.all import get_builtin_models

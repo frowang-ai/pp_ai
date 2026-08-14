@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
+
 from pi_ai.compat import stream_simple
 from pi_ai.env_api_keys import find_env_keys, get_env_api_key
 from pi_ai.models import get_supported_thinking_levels

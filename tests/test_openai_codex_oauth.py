@@ -27,6 +27,7 @@ than silently doing the wrong thing.
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.api import openai_codex_responses
 from pi_ai.auth import oauth
 from pi_ai.providers.all import get_builtin_models

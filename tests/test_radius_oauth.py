@@ -7,6 +7,7 @@ from urllib.parse import parse_qs
 
 import httpx
 import pytest
+
 from pi_ai.auth.oauth import radius
 from pi_ai.auth.types import AuthEvent, AuthInteraction, AuthPrompt, Credential
 from pi_ai.utils.abort import AbortController

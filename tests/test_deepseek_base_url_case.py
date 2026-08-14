@@ -9,6 +9,7 @@ missed every DeepSeek branch and got the wrong request shape.
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.api.openai_completions import detect_compat
 from pi_ai.types import Model
 

@@ -21,6 +21,7 @@ from urllib.parse import parse_qs, urlparse
 
 import httpx
 import pytest
+
 from pi_ai.auth.oauth.openrouter import build_openrouter_oauth, login_openrouter
 from pi_ai.auth.types import AuthEvent, AuthInteraction, AuthPrompt, Credential, InMemoryCredentialStore
 from pi_ai.images_registry import create_images_models

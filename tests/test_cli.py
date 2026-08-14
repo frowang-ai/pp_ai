@@ -20,6 +20,7 @@ from dataclasses import dataclass
 from typing import Any
 
 import pytest
+
 from pi_ai.auth.types import AuthEvent, AuthInteraction, AuthPrompt
 from pi_ai.cli import (
     ConsoleInteraction,

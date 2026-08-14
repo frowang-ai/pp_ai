@@ -9,6 +9,7 @@ it fully.
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.models_store import InMemoryModelsStore, ModelsStoreEntry, ModelsStoreOperationOptions
 from pi_ai.types import Model
 from pi_ai.utils.abort import AbortController, AbortError

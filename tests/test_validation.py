@@ -6,6 +6,7 @@ Includes the Python port of `packages/ai/test/validation.test.ts`.
 import json
 
 import pytest
+
 from pi_ai.types import Tool, ToolCall
 from pi_ai.utils.validation import (
     ToolValidationError,

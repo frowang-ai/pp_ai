@@ -23,6 +23,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 import pytest
+
 from pi_ai.auth.types import (
     ApiKeyAuth,
     AuthInteraction,

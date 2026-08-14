@@ -15,6 +15,7 @@ from dataclasses import replace
 from typing import Any
 
 import httpx
+
 from pi_ai.api.mistral_conversations import MistralOptions, stream
 from pi_ai.providers.all import get_builtin_model
 from pi_ai.types import (

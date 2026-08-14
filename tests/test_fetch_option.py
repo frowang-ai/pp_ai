@@ -29,6 +29,7 @@ from collections.abc import Iterator
 
 import httpx
 import pytest
+
 from pi_ai.api.anthropic_messages import stream_simple as stream_anthropic
 from pi_ai.api.azure_openai_responses import stream_simple as stream_azure_openai_responses
 from pi_ai.api.google_generative_ai import stream_simple as stream_google_generative_ai

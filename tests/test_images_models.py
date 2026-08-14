@@ -6,6 +6,7 @@ import asyncio
 from dataclasses import dataclass, field
 
 import pytest
+
 from pi_ai.auth.types import ApiKeyAuth, AuthResult, Credential, EnvLookup, ProviderAuth, ResolvedAuth
 from pi_ai.images_registry import ImagesProvider, create_images_models, create_images_provider
 from pi_ai.models import ModelsError

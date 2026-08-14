@@ -10,6 +10,7 @@ offline catalog assertions below are the part that pins model identifiers.
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.providers.all import get_builtin_models
 
 MODELS = get_builtin_models("amazon-bedrock")

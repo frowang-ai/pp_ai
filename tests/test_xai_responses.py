@@ -12,6 +12,7 @@ import json
 from typing import Any
 
 import httpx
+
 from pi_ai.api.openai_responses import OpenAIResponsesOptions
 from pi_ai.models import get_supported_thinking_levels
 from pi_ai.providers.all import get_builtin_model, get_builtin_models

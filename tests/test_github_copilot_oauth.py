@@ -17,6 +17,7 @@ from typing import Any
 
 import httpx
 import pytest
+
 from pi_ai.auth.oauth.device_code import DeviceCodeClock
 from pi_ai.auth.oauth.github_copilot import build_github_copilot_oauth
 from pi_ai.auth.types import AuthEvent, AuthInteraction, AuthPrompt, Credential, InMemoryCredentialStore

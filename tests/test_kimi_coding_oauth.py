@@ -10,6 +10,7 @@ import asyncio
 
 import httpx
 import pytest
+
 from pi_ai.auth.oauth.device_code import DeviceCodeClock, DeviceCodeError
 from pi_ai.auth.oauth.kimi_coding import (
     DEFAULT_POLL_INTERVAL_SECONDS,

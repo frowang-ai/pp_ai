@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
+
 from pi_ai.compat import stream_simple
 from pi_ai.providers.all import get_builtin_model
 from pi_ai.types import (

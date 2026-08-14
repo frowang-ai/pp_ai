@@ -11,6 +11,7 @@ import json
 from typing import Any
 
 import httpx
+
 from pi_ai.api.openai_completions import OpenAICompletionsOptions, stream
 from pi_ai.types import AssistantMessage, Context, Model, ModelCost, Tool, ToolCall
 from pi_ai.utils.json_stringify import json_stringify

@@ -32,6 +32,7 @@ Behaviors left uncovered by the Python port:
 from __future__ import annotations
 
 import pytest
+
 from pi_ai.providers.all import get_builtin_model
 
 

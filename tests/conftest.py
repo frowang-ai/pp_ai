@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 import pytest
+
 from pi_ai.utils import http as pi_http
 
 

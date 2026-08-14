@@ -6,6 +6,7 @@ No network is used: only the environment resolution is exercised.
 """
 
 import pytest
+
 from pi_ai.utils.node_http_proxy import (
     UNSUPPORTED_PROXY_PROTOCOL_MESSAGE,
     get_proxy_for_url,

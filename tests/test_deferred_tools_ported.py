@@ -11,6 +11,7 @@ import dataclasses
 from typing import Any
 
 import pytest
+
 from pi_ai.api.openai_completions import ResolvedCompat
 from pi_ai.api.openai_completions import convert_messages as convert_completions_messages
 from pi_ai.compat import stream_simple

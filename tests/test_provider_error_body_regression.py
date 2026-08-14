@@ -24,6 +24,7 @@ import re
 
 import httpx
 import pytest
+
 from pi_ai.api import openai_completions, openai_responses
 from pi_ai.types import Context, Model, ModelCost, StreamOptions, TextContent, UserMessage
 from pi_ai.utils.event_stream import AssistantMessageEventStream

@@ -7,6 +7,7 @@ the two ports.
 """
 
 import pytest
+
 from pi_ai.utils.hash import short_hash
 
 
