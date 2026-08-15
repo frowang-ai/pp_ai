@@ -1,6 +1,6 @@
 [project]
 name = "pp-ai"
-version = "0.1.0"
+version = "0.2.0"
 description = "Unified LLM API with automatic model discovery and provider configuration (Python port of @earendil-works/pi-ai)"
 readme = "README.md"
 license = "MIT"
@@ -23,7 +23,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "pp-telemetry==0.1.0",
+    "pp-telemetry==0.2.0",
     "httpx>=0.27",
     "jsonschema>=4.23",
 ]
