@@ -63,6 +63,7 @@ from .types import (
     SimpleStreamOptions,
     StreamOptions,
 )
+from .utils.error_details import build_error_details
 from .utils.event_stream import AssistantMessageEventStream
 from .utils.tasks import spawn
 
@@ -274,6 +275,7 @@ def _stream_through_models(
                 model=model.id,
                 stop_reason="error",
                 error_message=str(error),
+                error_details=build_error_details(error),
             )
             event_stream.push(ErrorEvent(reason="error", error=output))
             event_stream.end()

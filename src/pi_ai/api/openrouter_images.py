@@ -40,6 +40,7 @@ from ..types import (
     now_ms,
 )
 from ..utils.error_body import format_provider_error, normalize_provider_error
+from ..utils.error_details import build_error_details
 from ..utils.headers import headers_to_record, provider_headers_to_record
 from ..utils.http import ProviderHttpError, build_timeout
 from ..utils.sanitize_unicode import sanitize_surrogates
@@ -191,4 +192,5 @@ async def generate_images(
     except BaseException as error:
         output.stop_reason = "aborted" if (options.signal is not None and options.signal.aborted) else "error"
         output.error_message = format_provider_error(normalize_provider_error(error))
+        output.error_details = build_error_details(error, aborted=output.stop_reason == "aborted")
         return output

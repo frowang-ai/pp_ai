@@ -31,6 +31,7 @@ from ..types import (
 )
 from ..utils.deferred_tools import split_deferred_tools
 from ..utils.error_body import format_provider_error, normalize_provider_error
+from ..utils.error_details import build_error_details
 from ..utils.event_stream import AssistantMessageEventStream
 from ..utils.headers import apply_header_overrides
 from ..utils.http import HttpRequest, stream_sse
@@ -370,6 +371,7 @@ async def _run_stream(
     except asyncio.CancelledError:
         output.stop_reason = "aborted"
         output.error_message = "Request was aborted"
+        output.error_details = build_error_details(RuntimeError("Request was aborted"), aborted=True)
         event_stream.push(ErrorEvent(reason="aborted", error=output))
         event_stream.end()
         raise
@@ -377,6 +379,7 @@ async def _run_stream(
         aborted = options.signal is not None and options.signal.aborted
         output.stop_reason = "aborted" if aborted else "error"
         output.error_message = _format_openai_responses_error(error)
+        output.error_details = build_error_details(error, aborted=aborted)
         event_stream.push(ErrorEvent(reason=output.stop_reason, error=output))
         event_stream.end()
 

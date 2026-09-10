@@ -103,6 +103,46 @@ def test_detect_compat_deepseek_uses_deepseek_thinking_and_max_tokens():
     assert compat.supports_store is False
 
 
+def test_detect_compat_deepseek_by_model_id_behind_custom_gateway():
+    # pp_ai extension: a gateway with a custom base URL serving DeepSeek models
+    # is detected from the model id even though the URL gives no hint.
+    compat = detect_compat(
+        make_model(id="deepseek-v4-flash", provider="custom-gateway", base_url="https://gateway.example.com/v1")
+    )
+    assert compat.thinking_format == "deepseek"
+    assert compat.max_tokens_field == "max_tokens"
+    assert compat.requires_reasoning_content_on_assistant_messages is True
+    assert compat.supports_store is False
+
+
+def test_detect_compat_deepseek_model_id_match_is_case_insensitive():
+    compat = detect_compat(make_model(id="DeepSeek-V4-Flash", provider="custom", base_url="https://gw.example.com/v1"))
+    assert compat.thinking_format == "deepseek"
+
+
+def test_detect_compat_does_not_match_non_deepseek_model_ids():
+    compat = detect_compat(make_model(id="my-deepseek-fine-tune", provider="custom", base_url="https://gw.example.com/v1"))
+    assert compat.thinking_format == "openai"
+    assert compat.requires_reasoning_content_on_assistant_messages is False
+
+
+def test_build_params_injects_deepseek_thinking_for_gateway_hosted_model():
+    model = make_model(
+        id="deepseek-v4-flash",
+        provider="custom-gateway",
+        base_url="https://gateway.example.com/v1",
+        reasoning=True,
+    )
+    params = build_params(
+        model, Context(messages=[]), OpenAICompletionsOptions(api_key="k", reasoning_effort="high", max_tokens=1000)
+    )
+    assert params["thinking"] == {"type": "enabled"}
+    assert params["reasoning_effort"] == "high"
+    # DeepSeek uses `max_tokens`, not OpenAI's `max_completion_tokens`.
+    assert params["max_tokens"] == 1000
+    assert "max_completion_tokens" not in params
+
+
 def test_detect_compat_openrouter():
     compat = detect_compat(make_model(provider="openrouter", base_url="https://openrouter.ai/api/v1"))
     assert compat.thinking_format == "openrouter"
@@ -229,6 +269,41 @@ def test_parse_chunk_usage_falls_back_to_prompt_cache_hit_tokens():
     usage = parse_chunk_usage({"prompt_tokens": 100, "prompt_cache_hit_tokens": 40}, make_model())
     assert usage.cache_read == 40
     assert usage.input == 60
+
+
+def test_parse_chunk_usage_falls_back_to_top_level_cached_tokens():
+    # Kimi documents top-level `usage.cached_tokens` on the final usage chunk;
+    # it is the last fallback after prompt_tokens_details and
+    # prompt_cache_hit_tokens.
+    usage = parse_chunk_usage({"prompt_tokens": 100, "cached_tokens": 40}, make_model())
+    assert usage.cache_read == 40
+    assert usage.input == 60
+
+
+def test_parse_chunk_usage_prefers_prompt_cache_hit_tokens_over_top_level_cached_tokens():
+    usage = parse_chunk_usage({"prompt_tokens": 100, "prompt_cache_hit_tokens": 10, "cached_tokens": 40}, make_model())
+    assert usage.cache_read == 10
+    assert usage.input == 90
+
+
+async def test_stream_counts_top_level_cached_tokens_from_kimi_usage_chunk():
+    body = sse_body(
+        [
+            {"id": "r", "choices": [{"delta": {"content": "hi"}}]},
+            {
+                "id": "r",
+                "choices": [{"delta": {}, "finish_reason": "stop"}],
+                "usage": {"prompt_tokens": 100, "completion_tokens": 5, "cached_tokens": 70},
+            },
+        ]
+    )
+    async with make_client(body) as client:
+        _events, message = await collect(
+            stream(make_model(), Context(messages=[]), OpenAICompletionsOptions(api_key="k"), client=client)
+        )
+    assert message.stop_reason == "stop"
+    assert message.usage.cache_read == 70
+    assert message.usage.input == 30
 
 
 # --------------------------------------------------------------------------

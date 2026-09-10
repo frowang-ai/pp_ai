@@ -39,6 +39,7 @@ Transport = Literal["sse", "websocket", "websocket-cached", "auto"]
 SessionAffinityFormat = Literal["openai", "openai-nosession", "openrouter"]
 StopReason = Literal["pending", "stop", "length", "toolUse", "error", "aborted", "deferred"]
 ImagesStopReason = Literal["stop", "error", "aborted"]
+ErrorKind = Literal["auth", "quota", "rate_limit", "server", "network", "aborted", "unknown"]
 GrammarFormat = Literal["openai_lark", "openai_regex"]
 
 THINKING_LEVELS: tuple[ModelThinkingLevel, ...] = (
@@ -193,6 +194,30 @@ class AssistantMessageDiagnostic:
 
 
 @dataclass
+class AssistantMessageErrorDetails:
+    """Structured error info on a terminal :class:`AssistantMessage`.
+
+    pi_ai-specific extension (no TypeScript counterpart): providers swallow
+    exceptions into the ``error`` event, which left the HTTP status only inside
+    the ``error_message`` string. This struct lets callers classify failures —
+    for example to decide whether to fail over to another provider — without
+    parsing that string. Built by
+    :func:`pi_ai.utils.error_details.build_error_details`.
+    """
+
+    kind: ErrorKind = "unknown"
+    """Normalized category: auth (401/403), quota (402), rate_limit (429),
+    server (5xx), network (transport-level failure), aborted, or unknown."""
+    status: int | None = None
+    """HTTP status code, when one could be extracted from the error."""
+    body: str | None = None
+    """Raw HTTP error body, trimmed and truncated, when available."""
+    retry_after_ms: float | None = None
+    """Server-requested retry delay from ``retry-after-ms``/``retry-after``
+    response headers, when present."""
+
+
+@dataclass
 class AssistantMessage:
     api: Api = ""
     provider: ProviderId = ""
@@ -205,6 +230,8 @@ class AssistantMessage:
     diagnostics: list[AssistantMessageDiagnostic] = field(default_factory=list)
     deferred: DeferredHandle | None = None
     error_message: str | None = None
+    error_details: AssistantMessageErrorDetails | None = None
+    """Structured error info, set when ``stop_reason`` is ``"error"`` or ``"aborted"``."""
     raw_stop_reason: str | None = None
     end_turn: bool | None = None
     timestamp: int = field(default_factory=now_ms)
@@ -323,6 +350,8 @@ class AssistantImages:
     usage: Usage | None = None
     stop_reason: ImagesStopReason = "stop"
     error_message: str | None = None
+    error_details: AssistantMessageErrorDetails | None = None
+    """Structured error info, set when ``stop_reason`` is ``"error"`` or ``"aborted"``."""
     timestamp: int = field(default_factory=now_ms)
 
 

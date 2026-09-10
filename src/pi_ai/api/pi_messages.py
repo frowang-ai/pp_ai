@@ -63,6 +63,7 @@ from ..types import (
     now_ms,
 )
 from ..utils.diagnostics import append_assistant_message_diagnostic, create_assistant_message_diagnostic
+from ..utils.error_details import build_error_details
 from ..utils.event_stream import AssistantMessageEventStream
 from ..utils.headers import provider_headers_to_record
 from ..utils.http import HttpRequest, ProviderHttpError, stream_sse
@@ -163,6 +164,7 @@ def _create_error_event(model: Model, error: BaseException, aborted: bool) -> Er
         usage=Usage(),
         stop_reason=reason,
         error_message=str(error) if str(error) else type(error).__name__,
+        error_details=build_error_details(error, aborted=aborted),
         timestamp=now_ms(),
     )
     if not aborted and isinstance(error, PiMessagesResponseError):

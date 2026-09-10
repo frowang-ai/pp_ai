@@ -51,6 +51,7 @@ from ..types import (
     Usage,
     now_ms,
 )
+from ..utils.error_details import build_error_details
 from ..utils.event_stream import AssistantMessageEventStream
 from ..utils.hash import short_hash
 from ..utils.headers import apply_header_overrides
@@ -131,7 +132,14 @@ def detect_compat(model: Model) -> ResolvedCompat:
 
     # `baseUrl.toLowerCase()` upstream: a provider configured with a
     # mixed-case host would otherwise miss every DeepSeek-specific branch.
-    is_deepseek = provider == "deepseek" or "deepseek.com" in base_url.lower()
+    # The model-id prefix check is a pp_ai extension: a gateway with a custom
+    # base URL serving DeepSeek models (e.g. `deepseek-v4-flash`) needs the
+    # same DeepSeek compat behavior even though the URL gives no hint.
+    is_deepseek = (
+        provider == "deepseek"
+        or "deepseek.com" in base_url.lower()
+        or model.id.lower().startswith("deepseek")
+    )
     is_non_standard = (
         is_nvidia
         or provider == "cerebras"
@@ -562,7 +570,10 @@ def parse_chunk_usage(raw_usage: dict[str, Any], model: Model) -> Usage:
     details = raw_usage.get("prompt_tokens_details") or {}
     cache_read_tokens = details.get("cached_tokens")
     if cache_read_tokens is None:
-        cache_read_tokens = raw_usage.get("prompt_cache_hit_tokens") or 0
+        cache_read_tokens = raw_usage.get("prompt_cache_hit_tokens")
+    if cache_read_tokens is None:
+        # Kimi documents top-level `usage.cached_tokens` on the final usage chunk.
+        cache_read_tokens = raw_usage.get("cached_tokens") or 0
     cache_write_tokens = details.get("cache_write_tokens") or 0
 
     # cached_tokens counts cache reads; writes are reported separately by
@@ -1025,6 +1036,7 @@ async def _run_stream(
     except asyncio.CancelledError:
         output.stop_reason = "aborted"
         output.error_message = "Request was aborted"
+        output.error_details = build_error_details(RuntimeError("Request was aborted"), aborted=True)
         event_stream.push(ErrorEvent(reason="aborted", error=output))
         event_stream.end()
         raise
@@ -1034,6 +1046,7 @@ async def _run_stream(
         aborted = options.signal is not None and options.signal.aborted
         output.stop_reason = "aborted" if aborted else "error"
         output.error_message = format_provider_error(normalize_provider_error(error))
+        output.error_details = build_error_details(error, aborted=aborted)
         event_stream.push(ErrorEvent(reason=output.stop_reason, error=output))
         event_stream.end()
 
